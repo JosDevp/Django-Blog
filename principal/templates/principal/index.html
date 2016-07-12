@@ -1,0 +1,234 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blogg-ing</title>
+    {% load staticfiles %}
+    <link rel="icon" type="image/png"  href="{% static 'principal/img/portfolio/code.png' %}"  sizes="50x50">
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link rel="stylesheet" type="text/css" href="{% static 'principal/css/bootstrap.min.css' %}" >
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'principal/css/freelancer.css' %}" >
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'principal/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{%  url 'encuesta:index' %}">Blogg-ing</a>
+                 {% if user.is_authenticated %}
+              <p class="navbar-text pull-right">
+                 <span class="label label-primary">{{user.username}}</span>
+                 
+              </p>
+
+         {% endif %}
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="{%  url 'encuesta:index' %}">Blog</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="{% url 'encuesta:videos'%}">VideoTutoriales</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                     <li class="page-scroll">
+                        <a href="{% url 'encuesta:logout' %}">Cerrar Sesion</a>
+
+                    </li>
+                    {% else %}
+                    <li class="page-scroll">
+                        <a href="{% url 'encuesta:login' %}">Login</a>
+                    <li><a href="#">Libros</a></li>   
+                    </li>
+                    {% endif %}
+
+                   
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="{% static 'principal/img/portfolio/py.png' %}"  width="100px"  alt="">
+                    <div class="intro-text">
+                        <span class="name">Blogg-ing </span>
+                        <hr class="star-light">
+                        <span class="skills">Imagina Encontrar todo lo relacionado con programacion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+  
+    {% block content %}
+    <section id="portfolio">
+        <div class="container">
+             <div class="searchbox">
+            <form method='GET' action=''>
+            <input type='text' name='q' class="form-control"   placeholder='Busqueda de Temas Interesantes'  value='{{ request.GET.q }}'></br>
+            <center><input type='submit' class="btn btn-success"  value='Buscame' /></center>
+            </form>
+        </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Post Interesantes</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                {% if contacts %}
+                    {% for articulos in contacts %}
+
+                <div class="col-sm-4 portfolio-item">
+                    <a href="{% url 'encuesta:detail' articulos.id %}" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                                 <h6>{{articulos.titulo}}</h6>
+                                 <h6> {{articulos.timestamp}}</h6>
+                               
+                            </div>
+                        </div>
+                        <img src="/media/{{articulos.imagen}} " class="img-responsive" alt=""  >
+                    </a>
+                    <center>
+                <!--<p id="id_votos">Me Gusta<i  class="glyphicon glyphicon-apple">{{articulos.votes}}</i></p>-->
+                 <button id="tacos" type="button" class="btn btn-primary btn-xs"> 
+                    <p id="votos_tacos">
+                    <span class="glyphicon glyphicon-apple" aria-hidden="true">0</span>
+                      
+                    </p>
+            
+                </button>
+            </center>
+                </div>
+
+                   {% endfor %}
+                    {% else %}
+                    <p>No hay lista.</p>
+                {% endif %}
+                
+            </div>
+        </div>
+        <nav>
+  <ul class="pager">
+     {% if contacts.has_previous %}
+    <li class="previous"><a href="?page={{ contacts.previous_page_number }}"><span aria-hidden="true">&larr;</span> Older</a></li>
+    {% endif %}
+      {% if contacts.has_next %}
+    <li class="next"><a href="?page={{ contacts.next_page_number }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+     {% endif %}
+  </ul>
+</nav>
+        
+    </section>
+    {% endblock content %}
+
+    <!-- Footer -->
+    <footer class="text-center">
+        
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h5>Blog Django</h5>
+                        Copyright &copy; blogpythondj 2015
+                    </div>
+                    <div class="footer-col col-md-4">
+                         <h5>Redes Sociales</h5>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                     <h5>Desarrollo</h5>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+  
+    
+
+    <!-- jQuery -->
+    
+    <script src="{% static 'principal/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'principal/js/bootstrap.min.js' %}"></script>
+    <script   src="http://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+
+</body>
+
+</html>

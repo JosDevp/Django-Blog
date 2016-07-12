@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Formulario</title>
+      {% load staticfiles %}
+    <link href="{% static 'principal/css/bootstrap.min.css' %}"  rel="stylesheet">
+
+    <link href="{% static 'principal/css/sticky-footer.css'%}" rel="stylesheet">
+
+    {% block head_extra %}
+    
+    {% endblock head_extra %}
+
+  </head>
+
+  <body>
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Llenar Post</h1>
+      </div>
+     
+       {% block content %}
+       {% endblock content %}
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">org.blog</p>
+      </div>
+    </footer>
+
+ <script   src="http://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+
+  </body>
+
+
+</html>

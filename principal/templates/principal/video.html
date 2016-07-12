@@ -1,0 +1,59 @@
+{% extends "principal/base.html" %}
+
+{% block title %} Videos {% endblock title %}
+{% block content %}
+<!--<table class="table table-condensed">
+	<thead>
+                <tr class="active">
+                  <th>Titulo</th>
+                  <th>Categoria</th>
+                    <th>Votos</th>
+                    <th>Ver</th>
+                     
+                </tr>
+        </thead>
+          {% if latest_question_list %}
+      {%  for e in latest_question_list %}
+	   <tbody>
+	   	<tr class="active">
+	      <tr >
+				<td> <p class="text-info">{{ e.titulo}}</p></td>
+				<td><p class="text-info">{{ e.categoria }}</p></td>
+					<td> <p class="text-info">{{ e.votes }}</p></td>
+
+
+				<td><a class="btn btn-info" href="{% url 'encuesta:videodeta' e.id %}"><i class="icon-search"></i>   Ver</a></td>
+
+				
+
+	       {% endfor %}
+	        {% else %}
+                    <p>No hay lista.</p>
+                {% endif %}
+	       </tr>
+	       </tbody>    
+  
+</table>-->
+
+<div class="panel panel-success">
+  <div class="panel-body">
+<h3><p align="center">Lista videotutoriales</p></h3>
+<div class="list-group">
+	  {% if latest_question_list %}
+      {%  for e in latest_question_list %}
+  <a href="{% url 'encuesta:videodeta' e.id %}" class="list-group-item list-group-item-success">{{e.titulo}}</a>
+  {% endfor %}
+  {% else %}
+           <p>No hay lista.</p>
+      {% endif %}
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+{% endblock content %}

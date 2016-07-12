@@ -1,0 +1,48 @@
+{% extends "principal/base.html" %}
+
+{% block title %}Sign-up / Login{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+
+        
+
+        <div class="row">
+            
+            <div class=" col-md-12 text-center">
+                 <h1 class="text-center"><strong>Comienza Ahora!</strong>,</h1>
+                 <h1 class="text-center"><strong>es gratis Let's go</strong></h1>
+                <p>&nbsp;</p>
+
+                <div class="col-md-push-3 col-md-6 text-center">
+                     <p class="text-center">Descubre como bloggin puede ayudarte a  buscar tus temas:</p>
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                         {{form.as_p}}
+                          {% if next %}
+        <input type="hidden" value="{{next}}" name="next">
+    {% else %}
+        <input type="hidden" value="/" name="next">
+    {% endif %}
+ 
+
+
+    <button class="btn btn-success btn-lg btn-block" type="submit"> Log in </button>
+    <center><strong><h6>Si no cuentas con un usuario Registrate <a href=" {% url 'encuesta:registro' %} ">Aquí</a> </strong></h6></center>
+
+    <div align="right">
+      <center><strong><h6><a href=" {%  url 'encuesta:index' %} ">Inicio</a> </strong></center></h6>
+    </div>
+
+                    </form>
+                </div><!-- col-md-6 -->
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div><!-- /container -->
+    
+
+{% endblock content %}

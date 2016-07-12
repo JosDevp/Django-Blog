@@ -1,0 +1,87 @@
+{% extends "principal/base.html" %}
+
+{% block title %} Encuesta de Tutoriales {% endblock title %}
+{% block content %}
+
+<div class="panel panel-success">
+
+<h3><p align="center">Encuesta</p></h3>
+   
+        <div class="grafica">
+            <h1>Sistema de Votaciones</h1>
+            <span id="spinner" class="fa fa-spin fa-3x"></span>
+            <div id="chart"></div>
+            <button id="bar" type="button" class="btn btn-success">
+                <span class="fa fa-bar-chart"></span>
+                Gráfica de barras
+            </button>
+            <button id="pie" class="btn btn-success">
+                <span class="fa fa-pie-chart"></span>
+                Gráfica circular o de tarta
+            </button>
+            <button id="donut" class="btn btn-success">
+                <span class="fa fa-circle-o-notch"></span>
+                Gráfica de rosca
+            </button>
+            <button id="random" class="btn btn-warning">
+                <span class="fa fa-random "></span>
+                Datos aleatorios
+            </button>
+        </div>
+       <hr/>
+
+        <div class="voteApp">
+                 <div class="row">
+                 <div class="col-md-6">
+                <div class="comida">
+                    <button id="tacos" type="button" class="btn btn-primary btn-lg">Java
+                    <p id="votos_tacos" >
+                        <span class="glyphicon glyphicon-apple">0</span>
+                        <br> votos
+                    </p>
+                    </button>
+                </div>
+                 </div>
+                 <div class="col-md-6">
+                <div class="comida">
+                    <button id="paella" type="button" class="btn btn-success btn-lg">Python</button>
+                    <p id="votos_paella" class="bg-info">
+                        <span class="glyphicon glyphicon-apple">0</span>
+                        <br> votos
+                    </p>
+                </div>
+                    </div>
+                     <div class="col-md-6">
+                <div class="comida">
+                    <button id="ceviche" type="button" class="btn btn-info btn-lg">.NET</button>
+                    <p id="votos_ceviche" class="bg-info">
+                        <span class="glyphicon glyphicon-apple">0</span>
+                        <br> votos
+                    </p>
+                </div>
+                </div>
+                 <div class="col-md-6">
+                <div class="comida">
+                    <button id="mangu" type="button" class="btn btn-warning btn-lg">GO</button>
+                    <p id="votos_mangu" class="bg-info">
+                        <span class="glyphicon glyphicon-apple">0</span>
+                        <br> votos
+                    </p>
+                </div>
+           </div>
+            <div id="total">
+                <span class="glyphicon glyphicon-apple">0</span>
+                <br> Total de votos emitidos
+            </div>
+            </div>
+        </div>
+    </div>
+	 
+
+
+
+
+
+
+
+{% endblock content %}

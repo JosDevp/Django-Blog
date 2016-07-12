@@ -1,0 +1,35 @@
+{% extends 'principal/base.html' %}
+
+
+{% block title %} Iniciar Registro{% endblock %}
+{% block content %} 
+  <div class="container">
+<div class="row">
+<div class=" col-md-12 text-center">
+                    
+                    <hr>
+ <div class="col-md-push-3 col-md-6 text-center">
+                    <form action="." method="POST">
+                    	<center><strong><h4>Registrate <a href="#">!Bloggin (-_-)</a> </strong></h4></center>
+                        <p class="text-center">Registrate, empieza a crear  y verificar tus bloggin:</p>
+                         {% csrf_token %}
+                         {{form.as_p}}
+                      
+                        <button type="submit" class="btn btn-success btn-lg btn-block">Sign up</button>
+                        <br>
+                        <hr>
+                        <center><strong><h6>Tambien te puedes Registrar por redes sociales <a href="#">!animate</a> </strong></h6></center>
+
+                        <p>
+                        <a href="#" class="btn btn-primary btn-lg btn-block">Regitrate con Facebook</a>
+                        <a href="#" class="btn btn-danger btn-lg btn-block">Regitrate con Google+</a>
+                    </p>
+                    
+                    </form>
+                </div><!-- col-md-6 -->
+            </div>
+</div>
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,102 @@
+{% extends "principal/base.html" %}
+
+{% block title %} Detalle {% endblock title %}
+
+{% block content %}
+{{ content|safe }}
+
+
+
+
+
+<h1>{{ post.titulo}}</h1>
+
+<img src="/media/{{post.imagen}} " class="img-responsive" width="300px" height="300px">
+<div class="col-sm-12 content-markdown">
+
+<p align="justify">{{ post.body }}</p>
+<hr>	
+</div>
+
+
+
+<p align="right" >Tags</span>
+  {% for cat  in categoria %}
+<p align="right"><span class="label label-primary"><a href="#">{{ cat.name }}</a></span></p>
+  {% endfor %}
+ 
+<hr>
+<p align="right" >{{ post.autor}}</p>
+<p align="right" >{{ post.publish}}</p>
+
+<p class="lead"> Comentarios</p>
+ {% if user.is_authenticated %}
+<form method="POST" action=".">
+  {% csrf_token %}
+  {{ comment_form }}
+  <br/>
+  <input name='submit'class="btn btn-secondary"  type="submit" value="Comentar" />
+ </form>
+<hr/>
+{% else %}
+<blockquote>
+<p>Necesitas registrarte para comentar y pedir sugerencias</p>
+</blockquote>
+
+{% endif %}
+
+ 
+{% if user.is_authenticated %}
+{% for comment in comments %}
+
+   <blockquote>
+    <p>{{ comment.content }}</p>
+    <footer>{{ comment.user }}|{{comment.timestamp | timesince}} hace | {% if comment.children.count > 0 %}<span class="badge">{{ comment.children.count }} </span> Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class='comment-reply-btn' href='#'>Responder</a></footer>
+  <div class="comment-reply" style="display:none" >
+  {%  for child_comment in comment.children %}
+<blockquote>
+    <p>{{ child_comment.content }}</p>
+    <footer>{{ child_comment.user }}|{{child_comment.timestamp | timesince}} hace </footer>
+</blockquote>
+
+{% endfor %}
+
+
+   <form method="POST" action=".">
+	  {% csrf_token %}
+	  {{ comment_form }}
+	  <input type="hidden" name="parent_id" value="{{ comment.id }}">
+	  <input name='submit'class="btn btn-secondary"  type="submit" value="Responder" />
+	</form>
+
+
+</div>
+   </blockquote>
+    
+
+ <hr/>
+{% endfor %}
+{% else %}
+<blockquote>
+<p>Necesitas registrarte para responder a una sugerencia</p>
+
+</blockquote>
+
+{% endif %}
+
+{% if error_message %}
+ <p><strong> {{ error_message }}</strong></p>
+
+{% endif %}
+
+</br>
+
+
+
+
+
+{% endblock content %}
+
+
+
+
